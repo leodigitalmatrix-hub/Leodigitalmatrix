@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. COMPONENT INJECTOR (Fetches global parts)
     const loadPart = (id, url) => {
         const target = document.getElementById(id);
         if (target) {
@@ -10,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     target.innerHTML = html;
                     if (id === 'header-placeholder') highlightActive();
                     if (id === 'chatbot-placeholder') initChat();
-                })
-                .catch(err => console.error("Error loading component:", err));
+                });
         }
     };
 
@@ -19,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPart('footer-placeholder', '/footer.html');
     loadPart('chatbot-placeholder', '/chatbot.html');
 
-    // 2. ACTIVE PAGE HIGHLIGHTER
     function highlightActive() {
         const path = window.location.pathname;
         document.querySelectorAll('.nav-links a').forEach(link => {
@@ -31,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. CHATBOT LOGIC
     function initChat() {
         const trigger = document.getElementById('chatbot-trigger');
         const win = document.getElementById('chat-window');
@@ -42,11 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Global Bot Answers
     window.chatAnswer = (goal) => {
         const body = document.getElementById('chat-body');
-        let msg = goal === 'leads' ? "Our Lead Engine can scrap 500+ contacts/week. Ready for a trial?" : "We use n8n to auto-sync your CRM & WhatsApp. Save 10hrs/week.";
-        
+        let msg = goal === 'leads' ? "Our Lead Engine automates prospecting. Should I send you our Real Estate or B2B case study?" : "We use n8n to auto-sync your CRM & WhatsApp. Ready for a Process Audit?";
         const div = document.createElement('div');
         div.className = 'chat-msg msg-bot';
         div.innerText = msg;
